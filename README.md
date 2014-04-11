@@ -1,5 +1,7 @@
-Online Exam Management System (NG)
-==================================
+BUU Login Template
+==================
+
+by
 
 Norrapat Nimmanee
 -----------------
