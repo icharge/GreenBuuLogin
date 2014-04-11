@@ -1,0 +1,12 @@
+<div class="jumbotron text-center">
+	<h1>Contact Page</h1>
+	
+	<p>{{ message }}</p>
+	<p>ทดสอบการดึงข้อมูลจาก DB :
+		<ul ng-repeat="item in itemList">
+			<li>{{'รหัสนิสิต : ' + item.Stu_id + ' ชื่อ : ' + item.Stu_name + ' เพศ : ' + item.Stu_gender}}</li>
+		</ul>
+		<button ng-click="getData()">รับข้อมูล</button>
+	</p>
+	<button ng-click="go('/')">กลับสู่หน้าหลัก</button>
+</div>
