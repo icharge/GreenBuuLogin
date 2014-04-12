@@ -52,6 +52,14 @@
 		$scope.msgHeader = 'BUU Authentication';
 		Page.setTitle('Login');
 
+		$scope.DoLogin = function() {
+			$scope.loading = true;
+			$http.get('http://filltext.com/?rows=10&delay=5&fname={firstName}').success(function(data){
+				//$scope.msgHeader=data;
+				$scope.loading = false;
+			});
+			
+		}
 	});
 
 	myApp.controller('contactController', function($scope, Page, $location, $http) {
@@ -64,7 +72,7 @@
 			$http.get('app/database/select.php').success(function(data){
 				$scope.itemList = data;
 			});
-		};
+		}
 	});
 
 	myApp.controller('registerController', function($scope, Page, $http) {

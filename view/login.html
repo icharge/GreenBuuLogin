@@ -2,9 +2,9 @@
 	<div class="login-box text-center">
 		<form class="login" ng-controller="loginController">
 			<h1>{{ msgHeader }}</h1>
-			<input type="text" name="user" class="login-input" placeholder="User" autofocus>
-			<input type="password" name="password" class="login-input" placeholder="Password">
-			<input type="submit" value="Login" class="login-submit" ng-hide="loading">
+			<input type="text" name="user" class="login-input" placeholder="User" autofocus ng-disabled="loading">
+			<input type="password" name="password" class="login-input" placeholder="Password" ng-disabled="loading">
+			<input type="submit" value="Login" class="login-submit" ng-hide="loading" ng-click="DoLogin();">
 			<div class="spinner spinner--steps  icon-spinner-2" aria-hidden="true" ng-show="loading"></div>
 			<p class="login-help"><a href="index.html">Forgot password?</a></p>
 			</form>

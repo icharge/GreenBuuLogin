@@ -261,7 +261,7 @@ input, textarea, select, label {
   font-size:4em;
   height: 1em;
   line-height: 1;
-  margin: .5em;
+  margin: -4px 0px 8px;
   -webkit-animation: anim-rotate 2s infinite linear;
   animation: anim-rotate 2s infinite linear;
   color: #fff;
