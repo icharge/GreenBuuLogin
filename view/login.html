@@ -1,13 +1,14 @@
 <div class="wrapper" style="overflow: hidden;">
 	<div id="loginbox" class="login-box text-center">
-		<form class="login" ng-controller="loginController">
+		<form class="login">
 			<h1>{{ msgHeader }}</h1>
-			<div class="alert alert-danger" ng-show="hasErr">{{ msgFeedback }}</div>
-			<input type="text" name="user" class="login-input" placeholder="User" autofocus ng-disabled="loading">
-			<input type="password" name="password" class="login-input" placeholder="Password" ng-disabled="loading">
+			<div class="alert alert-danger" ng-show="hasErr"><span class="glyphicon glyphicon-warning-sign"></span> {{ msgFeedback }}</div>
+			<input type="text" ng-model="user" class="login-input" placeholder="User" autofocus ng-disabled="loading">
+			<input type="password" ng-model="password" class="login-input" placeholder="Password" ng-disabled="loading">
 			<input type="submit" value="Login" class="login-submit" ng-hide="loading" ng-click="DoLogin();">
 			<div class="spinner spinner--steps  icon-spinner-2" aria-hidden="true" ng-show="loading"></div>
 			<ul class="login-help">
+				<li><a href="#">Burapha University website</a></li>
 				<li><a href="#">Change password</a></li>
 				<li><a href="#">Reset password</a></li>
 				<li><a href="#">BUU Mail</a></li>

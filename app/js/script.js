@@ -4,26 +4,22 @@
 	// configure our routes
 	myApp.config(function($routeProvider) {
 		$routeProvider
-
 			// route for the home page
 			.when('/', {
 				templateUrl : 'view/home.html',
 				controller  : 'mainController',
 				title: 'Home'
 			})
-
-			// route for the about page
 			.when('/login', {
 				templateUrl : 'view/login.html',
-				controller  : 'loginController'
+				controller  : 'loginController',
+				title: 'Login'
 			})
-
-			// route for the contact page
-			.when('/contact', {
-				templateUrl : 'view/contact.html',
-				controller  : 'contactController'
+			.when('/logged', {
+				templateUrl : 'view/logged.html',
+				controller  : 'loggedController',
+				title: 'Welcome'
 			})
-
 			// test
 			.when('/register', {
 				templateUrl : 'view/register.html',
@@ -31,6 +27,27 @@
 			})
 			.otherwise({ redirectTo: '/' });
 	});
+	/*
+	myApp.run( function($rootScope, $location) {
+
+		// register listener to watch route changes
+		$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+			if ( $rootScope.loggedUser == null ) {
+				// no logged user, we should be going to #login
+				if ( next.templateUrl == "view/login.html" ) {
+					// already going to #login, no redirect needed
+				} else {
+					// not going to #login, we should redirect now
+					$location.path( "/login" );
+				}
+			} else {
+				if ( next.templateUrl == "view/login.html" ) {
+					$location.path( "/logged" );
+				}
+			}
+		});
+	})
+	*/
 
 	myApp.factory('Page', function(){
 		var title = 'default';
@@ -41,11 +58,11 @@
 	});
 
 	// create the controller and inject Angular's $scope
-	myApp.controller('mainController', function($scope, Page) {
+	myApp.controller('mainController', function($scope, $location, Page) {
 		// create a message to display in our view
-		$scope.message = 'Hello World สวัสดีชาวโลก';
 		$scope.Page = Page;
 		Page.setTitle('Home');
+		//$location.path('/login');
 	});
 
 	myApp.controller('loginController', function($scope, $http, $location, Page) {
@@ -55,26 +72,48 @@
 		$scope.DoLogin = function() {
 			$scope.hasErr = false;
 			$scope.loading = true;
-			$http.get('http://filltext.com/?rows=10&delay=1&fname={firstName}').success(function(data){
+			/*$http.get('http://filltext.com/?rows=10&delay=1&fname={firstName}').success(function(data){
 				//$scope.msgHeader=data;
 				$scope.loading = false;
 				$scope.hasErr = true;
 				$scope.msgFeedback = "ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 				$( "#loginbox" ).effect( "shake" );
+			});*/
+			$http.post('app/php/submitdata.php', {'user': $scope.user, 'password': $scope.password}
+			).success(function(data, status, headers, config) {
+				if (data.msg != '')
+				{
+					$scope.msgFeedback = data.msg;
+					$scope.loading = false;
+					$scope.hasErr = false;
+					$location.path('/logged');
+				}
+				else
+				{
+					$scope.msgFeedback = data.error;
+					$scope.loading = false;
+					$scope.hasErr = true;
+					$( "#loginbox" ).effect( "shake" );
+				}
+			}).error(function(data, status) { // called asynchronously if an error occurs
+// or server returns response with an error status.
+				$scope.msgFeedback = status;
+				$scope.loading = false;
+				$scope.hasErr = true;
+				$( "#loginbox" ).effect( "shake" );
 			});
-			
 		}
 	});
 
-	myApp.controller('contactController', function($scope, Page, $location, $http) {
-		Page.setTitle('Contact');
-		$scope.message = 'Contact us! JK. This is just a demo.';
-		$scope.go = function ( path ) {
-			$location.path( path );
-		};
-		$scope.getData = function() {
-			$http.get('app/database/select.php').success(function(data){
-				$scope.itemList = data;
+	myApp.controller('loggedController', function($scope, Page, $location, $http) {
+		$scope.msgHeader = 'Welcome back';
+		Page.setTitle('LoggedIn');
+		
+		$scope.DoLogout = function() {
+			$scope.loading = true;
+			$http.get('app/php/logout.php').success(function(data){
+				$scope.loading = false;
+				$location.path('/login');
 			});
 		}
 	});

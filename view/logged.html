@@ -1,0 +1,36 @@
+<div class="wrapper" style="overflow: hidden;">
+	<div id="loginbox" class="login-box text-center">
+		<div class="login">
+			<h1>{{ msgHeader }}</h1>
+			<div class="alert alert-danger" ng-show="hasErr"><span class="glyphicon glyphicon-warning-sign"></span> {{ msgFeedback }}</div>
+			
+			<div class="well">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">User Info</h3>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item"><span class="glyphicon glyphicon-user"></span> Norrapat Nimmanee</li>
+								<li class="list-group-item"><span class="glyphicon glyphicon-tag"></span> 54310104</li>
+								<li class="list-group-item"><span class="glyphicon glyphicon-certificate"></span> 10.201.xxx.xxx</li>
+								<li class="list-group-item"><span class="glyphicon glyphicon-flag"></span> อาคารเรียนรวม</li>
+								<li class="list-group-item"><span class="glyphicon glyphicon-time"></span> ...</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<input type="submit" value="Logout" class="login-submit red" ng-hide="loading" ng-click="DoLogout();">
+			<div class="spinner spinner--steps  icon-spinner-2" aria-hidden="true" ng-show="loading"></div>
+			<ul class="login-help">
+				<li><a href="#">Burapha University website</a></li>
+				<li><a href="#">Change password</a></li>
+				<li><a href="#">Reset password</a></li>
+				<li><a href="#">BUU Mail</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
