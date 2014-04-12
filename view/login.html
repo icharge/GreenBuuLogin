@@ -1,11 +1,12 @@
 <div class="wrapper">
-<div class="login-box text-center">
-	<form action="index.html" class="login">
-		<h1>{{ msgHeader }}</h1>
-		<input type="email" name="email" class="login-input" placeholder="User" autofocus>
-		<input type="password" name="password" class="login-input" placeholder="Password">
-		<input type="submit" value="Login" class="login-submit">
-		<p class="login-help"><a href="index.html">Forgot password?</a></p>
-		</form>
-</div>
+	<div class="login-box text-center">
+		<form class="login" ng-controller="loginController">
+			<h1>{{ msgHeader }}</h1>
+			<input type="text" name="user" class="login-input" placeholder="User" autofocus>
+			<input type="password" name="password" class="login-input" placeholder="Password">
+			<input type="submit" value="Login" class="login-submit" ng-hide="loading">
+			<div class="spinner spinner--steps  icon-spinner-2" aria-hidden="true" ng-show="loading"></div>
+			<p class="login-help"><a href="index.html">Forgot password?</a></p>
+			</form>
+	</div>
 </div>

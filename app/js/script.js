@@ -48,9 +48,10 @@
 		Page.setTitle('Home');
 	});
 
-	myApp.controller('loginController', function($scope, Page) {
-		$scope.msgHeader = 'BUU Internet Login';
+	myApp.controller('loginController', function($scope, $http, $location, Page) {
+		$scope.msgHeader = 'BUU Authentication';
 		Page.setTitle('Login');
+
 	});
 
 	myApp.controller('contactController', function($scope, Page, $location, $http) {
